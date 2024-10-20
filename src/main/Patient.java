@@ -1,28 +1,20 @@
 package main;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 import java.util.Objects;
 public class Patient {
     private final UUID patientId;
     private String name;
-    private Date dateOfBirth;//
-    private String diagnosis;//винести в exam.
+    private LocalDate dateOfBirth;//
 
     public Patient(UUID patientId) {
         this.patientId = patientId;
     }
-    public Patient(UUID patientId, String name, Date dateOfBirth, String diagnosis) {
+    public Patient(UUID patientId, String name, LocalDate dateOfBirth) {
         this.patientId = patientId;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.diagnosis = diagnosis;
     }
-    public Patient(String name, String diagnosis) {
-        this.patientId = UUID.randomUUID();
-        this.name = name;
-        this.diagnosis = diagnosis;
-    }
-
     public UUID getPatientId() {
         return patientId;
     }
@@ -33,7 +25,6 @@ public class Patient {
                 "patientId=" + patientId +
                 ", name='" + name + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
-                ", diagnosis='" + diagnosis + '\'' +
                 '}';
     }
     @Override
@@ -43,12 +34,11 @@ public class Patient {
         Patient patient = (Patient) o;
         return patientId == patient.patientId &&
                 Objects.equals(name, patient.name) &&
-                Objects.equals(dateOfBirth, patient.dateOfBirth) &&
-                Objects.equals(diagnosis, patient.diagnosis);
+                Objects.equals(dateOfBirth, patient.dateOfBirth);
     }
     @Override
     public int hashCode() {
-        return Objects.hash(patientId, name, dateOfBirth, diagnosis);
+        return Objects.hash(patientId, name, dateOfBirth);
     }
 
 }

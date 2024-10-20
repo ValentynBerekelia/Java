@@ -19,21 +19,21 @@ public class DoctorTest{
     void setUp(){
         doctor1 = new Doctor.DoctorBuilder()
                 .id(UUID.randomUUID())
-                .specialty("Neurology")
+                .specialty(Doctor.Specialty.NEUROLOGY)
                 .firstName("John")
                 .lastName("S")
                 .build();
         doctor2 = new Doctor.DoctorBuilder()
                 .firstName("Jane")
                 .lastName("N")
-                .specialty("Cardiology")
+                .specialty(Doctor.Specialty.CARDIOLOGY)
                 .id(UUID.randomUUID())
                 .build();
     }
     @Test
     void testDoctorCreation(){
         assertNotNull(doctor1.getId());
-        assertEquals(doctor1.getSpecialty(), "Neurology");
+        assertEquals(doctor1.getSpecialty(), Doctor.Specialty.NEUROLOGY);
         assertEquals(doctor1.getFirstName(), "John");
         assertEquals(doctor1.getLastName(), "S");
     }
@@ -43,14 +43,14 @@ public class DoctorTest{
         assertEquals(doctor1.getFirstName(), "Lina");
         doctor1.setLastName("Miracle");
         assertEquals(doctor1.getLastName(), "Miracle");
-        doctor1.setSpecialty("Cardiology");
-        assertEquals(doctor1.getSpecialty(), "Cardiology");
+        doctor1.getSpecialty();
+        assertEquals(doctor1.getSpecialty(), Doctor.Specialty.NEUROLOGY);
     }
     @Test
     void testEqualsAndHash(){
         Doctor doctor3 = new Doctor.DoctorBuilder()
                 .id(doctor1.getId())
-                .specialty("Neurology")
+                .specialty(Doctor.Specialty.NEUROLOGY)
                 .firstName("John")
                 .lastName("S")
                 .build();
@@ -60,7 +60,7 @@ public class DoctorTest{
     }
     @Test
     void testToString(){
-        String expected  = "Doctor{id=" + doctor1.getId() + ", firstName='John'" + ", lastName='S'" + ", specialty='Neurology'}";
+        String expected  = "Doctor{id=" + doctor1.getId() + ", firstName='John'" + ", lastName='S'" + ", specialty=" + Doctor.Specialty.NEUROLOGY + "}";
         assertEquals(expected , doctor1.toString());
     }
 }

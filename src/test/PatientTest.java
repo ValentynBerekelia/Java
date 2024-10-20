@@ -4,7 +4,7 @@ import main.Patient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,12 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class PatientTest {
 
     private Patient patient1;
-    private UUID patientId;
 
     @BeforeEach
     void setUp() {
-        patientId = UUID.randomUUID();
-        patient1 = new Patient(patientId, "Alice", new Date(946684800000L), "Flu"); // 2000-01-01
+        UUID patientId = UUID.randomUUID();
+        patient1 = new Patient(patientId, "Alice",LocalDate.of(24,10,20));
     }
 
     @Test

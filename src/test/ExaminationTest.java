@@ -6,7 +6,7 @@ import main.Patient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,11 +19,13 @@ class ExaminationTest {
         doctor = new Doctor.DoctorBuilder()
                 .firstName("Jon")
                 .lastName("Smit")
-                .specialty("Cardiology")
+                .specialty(Doctor.Specialty.CARDIOLOGY)
                 .id(UUID.randomUUID())
                 .build();
-        patient = new Patient("Alice","Flu");
-        examination = new Examination(doctor, patient, new Date(), "Room A");
+
+        UUID patientId = null;
+        patient = new Patient(patientId, "Alice", LocalDate.of(24, 10, 20));
+        examination = new Examination(doctor, patient, "Flu", LocalDate.of(24, 10, 20), "Room A");
     }
     @Test
     void testExaminationCreation() {
@@ -34,7 +36,7 @@ class ExaminationTest {
     }
     @Test
     void testToString() {
-        String expected = "Examination{doctor=" + doctor + ", patient=" + patient + ", date=" + examination.getDate() + ", room='Room A'}";
+        String expected = "Examination{doctor=" + doctor + ", patient=" + patient + ", date=" + examination.getDate() + ", room='Room A'" + ", diagnosis='Flu'}";
         assertEquals(expected, examination.toString());
     }
     @Test

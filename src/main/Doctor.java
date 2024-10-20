@@ -1,12 +1,21 @@
 package main;
+
 import java.util.Objects;
 import java.util.UUID;
 
 public class Doctor {
     private final UUID id;
-    private String specialty;//enum
+    private final Specialty specialty;//enum
     private String firstName;
     private String lastName;
+
+    public enum Specialty {
+        CARDIOLOGY,
+        DERMATOLOGY,
+        NEUROLOGY,
+        PEDIATRICS,
+        GENERAL_PRACTICE
+    }
 
     private Doctor(DoctorBuilder builder) {
         this.id = builder.id != null ? builder.id : UUID.randomUUID();
@@ -19,12 +28,8 @@ public class Doctor {
         return id;
     }
 
-    public String getSpecialty() {
+    public Specialty getSpecialty() {
         return specialty;
-    }
-
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
     }
 
     public String getFirstName() {
@@ -56,7 +61,7 @@ public class Doctor {
         return Objects.equals(id, doctor.id) &&
                 Objects.equals(firstName, doctor.firstName) &&
                 Objects.equals(lastName, doctor.lastName) &&
-                Objects.equals(specialty, doctor.specialty);
+                specialty == doctor.specialty;
     }
 
     @Override
@@ -65,13 +70,13 @@ public class Doctor {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", specialty='" + specialty + '\'' +
+                ", specialty=" + specialty +
                 '}';
     }
 
     public static class DoctorBuilder {
         private UUID id;
-        private String specialty;
+        private Specialty specialty;
         private String firstName;
         private String lastName;
 
@@ -80,7 +85,7 @@ public class Doctor {
             return this;
         }
 
-        public DoctorBuilder specialty(String specialty) {
+        public DoctorBuilder specialty(Specialty specialty) {
             this.specialty = specialty;
             return this;
         }

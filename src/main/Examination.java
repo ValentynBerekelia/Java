@@ -3,21 +3,24 @@ package main;
 import main.Doctor;
 import main.Patient;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 
 public class Examination {
     private final Doctor doctor;
     private final Patient patient;
-    private final Date date;//local date
+    private final String diagnosis;
+    private final LocalDate date;//local date
     private String room;
 
-    public Examination(Doctor doctor, Patient patient, Date date, String room) {
+
+    public Examination(Doctor doctor, Patient patient,String diagnosis, LocalDate date, String room) {
         this.doctor = doctor;
         this.patient = patient;
         this.date = date;
         this.room = room;
+        this.diagnosis = diagnosis;
     }
 
     public Doctor getDoctor() {
@@ -28,7 +31,9 @@ public class Examination {
         return patient;
     }
 
-    public Date getDate() {
+    private String getDiagnosis(){return diagnosis;}
+
+    public LocalDate getDate() {
         return date;
     }
 
@@ -48,12 +53,13 @@ public class Examination {
         return Objects.equals(doctor, that.doctor) &&
                 Objects.equals(patient, that.patient) &&
                 Objects.equals(date, that.date) &&
-                Objects.equals(room, that.room);
+                Objects.equals(room, that.room) &&
+                Objects.equals(diagnosis, that.diagnosis);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(doctor, patient, date, room);
+        return Objects.hash(doctor, patient, date, room,diagnosis);
     }
 
     @Override
@@ -63,6 +69,7 @@ public class Examination {
                 ", patient=" + patient +
                 ", date=" + date +
                 ", room='" + room + '\'' +
+                ", diagnosis='" + diagnosis + '\'' +
                 '}';
     }
 }
